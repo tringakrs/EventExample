@@ -72,16 +72,18 @@ class Counter extends EventEmitter {
   }
 }
 
-const counter = new Counter(0);
+const counter = new Counter();
 
 counter.on('increment', (val) => {
   console.log(`Counter value: ${val}`);
 });
 
-console.log(counter.value);
 counter.value=1;
-console.log(counter.value);
 counter.value=2;
-console.log(counter.value);
 counter.value=3;
-console.log(counter.value);
+
+// git checkout -b feature/branch
+// git add .
+// git commit -m "mesazhi"
+// git push
+// git push --set-upstream origin feature/emri i branch
