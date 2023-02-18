@@ -6,35 +6,35 @@ Krijo nje evnet tjeter ku ne parameter pranon nje objekt obj1= {init:‘Node’,
 krijo ne evnet tjeter “testEvent” ku kthen mesazhin “only test”. shfqaq numrin total te eventeve dhe ne fun fshij evnetin “testEvent”. Krijo nje repo te re, push 
 aplikacionin ne branch example-event-1 duke shtuar paraprakisht edhe .gitignore file.
 */
-const EventEmmiter=require("events");
-    const event=new EventEmmiter();
-    // console.log(event);
-    //First request
-    event.on('runEvent_1',()=>{
-        console.log('Hello from events')
-    })
-    event.emit('runEvent_1');
-    //Second request
-    const obj={
-        init:'Node',
-        version: '18'
-    }
-    event.on('event2',(obj)=>{
-        console.log(`objects from events ' ${JSON.stringify(obj)} `)
-    })
-    event.emit('event2',obj);
-    //test event
-    event.on('testEvent',()=>{
-        console.log('only test')
-    });
-    event.removeAllListeners('testEvent');
-    //Third request
-   const events=  event.eventNames();
-   console.log(events)
-   events.forEach(eventNames =>{
-    const count=event.listenerCount(eventNames);
-    console.log("Total number of listeners"+`${eventNames} : ${count}`)
-   })
+// const EventEmmiter=require("events");
+//     const event=new EventEmmiter();
+//     // console.log(event);
+//     //First request
+//     event.on('runEvent_1',()=>{
+//         console.log('Hello from events')
+//     })
+//     event.emit('runEvent_1');
+//     //Second request
+//     const obj={
+//         init:'Node',
+//         version: '18'
+//     }
+//     event.on('event2',(obj)=>{
+//         console.log(`objects from events ' ${JSON.stringify(obj)} `)
+//     })
+//     event.emit('event2',obj);
+//     //test event
+//     event.on('testEvent',()=>{
+//         console.log('only test')
+//     });
+//     event.removeAllListeners('testEvent');
+//     //Third request
+//    const events=  event.eventNames();
+//    console.log(events)
+//    events.forEach(eventNames =>{
+//     const count=event.listenerCount(eventNames);
+//     console.log("Total number of listeners"+`${eventNames} : ${count}`)
+//    })
 
 /*
 Pasi kemi  const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]; Te krijohet nje metod “getEvenNumbers” qe kthen vetem numrat qift. Te shfaqen ne eventin EvenEvent. 
@@ -51,4 +51,37 @@ function getEvenNumbers(numbers) {
   return evenNumbers;
 }
 
-getEvenNumbers(numbers);
+console.log(getEvenNumbers(numbers));
+
+/*
+
+*/
+class Counter extends EventEmitter {
+  constructor(initialValue) {
+    super();
+    this._value = initialValue;
+  }
+
+  get value() {
+    return this._value;
+  }
+
+  set value(val) {
+    this._value = val;
+    this.emit('increment', val);
+  }
+}
+
+const counter = new Counter(0);
+
+counter.on('increment', (val) => {
+  console.log(`Counter value: ${val}`);
+});
+
+console.log(counter.value);
+counter.value=1;
+console.log(counter.value);
+counter.value=2;
+console.log(counter.value);
+counter.value=3;
+console.log(counter.value);
